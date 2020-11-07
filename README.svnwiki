@@ -262,7 +262,7 @@ Stateful.
 
 <procedure>(tadd-between value)</procedure>
 
-Returns a transducer which interposes value between each value and the next. This does not compose gracefully with transducers like ttake, as you might end up ending the transduction on value.
+Returns a transducer which interposes value between each value and the next. This does not compose gracefully with transducers like {{ttake}}, as you might end up ending the transduction on value.
 
 Stateful.
 
