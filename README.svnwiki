@@ -268,7 +268,7 @@ Returns a transducer which interposes value between each value and the next. Thi
 
 <procedure>(tenumerate [start])</procedure>
 
-Returns a transducer that indexes values passed through it, starting at start, which defaults to 0. The indexing is done through cons pairs like (index . input).
+Returns a transducer that indexes values passed through it, starting at start, which defaults to 0. The indexing is done through cons pairs like {{(index . input)}}.
 
 <enscript highlight="scheme">
 (list-transduce (tenumerate 1) rcons (list 'first 'second 'third)) => ((1 . first) (2 . second) (3 . third))
@@ -278,7 +278,7 @@ Returns a transducer that indexes values passed through it, starting at start, w
 
 <procedure>(tlog [logger])</procedure>
 
-Returns a transducer that can be used to log or print values and results. The result of the logger procedure is discarded. The default logger is (lambda (result input) (write input) (newline)).
+Returns a transducer that can be used to log or print values and results. The result of the logger procedure is discarded. The default logger is {{(lambda (result input) (write input) (newline))}}.
 
 ==== Helper functions for writing transducers
 
@@ -290,7 +290,7 @@ Wraps a value in a <reduced> container, signalling that the reduction should sto
 
 <procedure>(reduced? value)</procedure>
 
-Returns #t if value is reduced.
+Returns {{#t}} if value is reduced.
 
 <procedure>(unreduce reduced-container)</procedure>
 
@@ -306,29 +306,29 @@ Wraps reducer in another reducer that encapsulates any returned reduced value in
 
 <procedure>(list-reduce f identity lst)</procedure>
 
-The reducing function used internally by list-transduce. f is reducer as returned by a transducer. identity is the identity (sometimes called "seed") of the reduction. lst is a list. If the f returns a reduced value, the reduction stops immediately and the unreduced value is returned.
+The reducing function used internally by {{list-transduce}}. {{f}} is reducer as returned by a transducer. {{identity}} is the identity (sometimes called "seed") of the reduction. {{lst}} is a list. If the {{f}} returns a reduced value, the reduction stops immediately and the unreduced value is returned.
 
 <procedure>(vector-reduce f identity vec)</procedure>
 
-The vector version of list-reduce.
+The vector version of {{list-reduce}}.
 
 <procedure>(string-reduce f identity str)</procedure>
 
-The string version of list-reduce.
+The string version of {{list-reduce}}.
 
 <procedure>(bytevector-u8-reduce f identity bv)</procedure>
 
-The bytevector-u8 version of list-reduce.
+The bytevector-u8 version of {{list-reduce}}.
 
 <procedure>(port-reduce f identity reader port)</procedure>
 
-The port version of list-reducer. It reduces over port using reader until reader returns the EOF object.
+The port version of {{list-reducer}}. It reduces over port using reader until reader returns the {{EOF}} object.
 
 <procedure>(generator-reduce f identity gen)</procedure>
 
-The port version of list-reducer. It reduces over gen until it returns the EOF object
+The port version of list-reducer. It reduces over gen until it returns the {{EOF}} object
 === Sample implementation
-The sample implementation is written in Guile, but should be straightforward to port since it uses no Guile-specific features apart from Guile's hash-table implementation. It is written for clarity over speed, but should be plenty fast anyway. The low-hanging fruit for optimization is to replace the composed transducers (such as tappend-map and tfilter-map) with non-composed implementations.
+The sample implementation is written in Guile, but should be straightforward to port since it uses no Guile-specific features apart from Guile's hash-table implementation. It is written for clarity over speed, but should be plenty fast anyway. The low-hanging fruit for optimization is to replace the composed transducers {{(such as tappend-map and tfilter-map)}} with non-composed implementations.
 
 Another optimization would be to return whether or not a reducer can return a reduced value, thus allowing [collection]-reduce to avoid checking for reduced values, however this would break compatibility with the sample implementation.
 === Acknowledgements
