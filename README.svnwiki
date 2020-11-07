@@ -196,25 +196,25 @@ Must not keep any internal state. Modifying the mapping while it's in use by {{t
 
 Returns a transducer that discards the first {{n}} values.
 
-Stateful.
+''Stateful.''
 
 <procedure>(ttake n)</procedure>
 
 Returns a transducer that discards all values and stops the transduction after the first {{n}} values have been let through. Any subsequent values are ignored.
 
-Stateful.
+''Stateful.''
 
 <procedure>(tdrop-while pred?)</procedure>
 
 Returns a transducer that discards the the first values for which {{pred?}} returns true.
 
-Stateful.
+''Stateful.''
 
 <procedure>(ttake-while pred? [retf])</procedure>
 
 Returns a transducer that stops the transduction after {{pred?}} has returned {{#f}}. Any subsequent values are ignored and the last successful value is returned. {{retf}} is a function that gets called whenever {{pred?}} returns false. The arguments passed are the result so far and the input for which {{pred?}} returns {{#f}}. The default function is {{(lambda (result input) result)}}
 
-Stateful.
+''Stateful.''
 
 <procedure>tconcatenate</procedure>
 
@@ -240,31 +240,31 @@ The same as {{(compose (tmap proc) tconcatenate)}}.
 
 Returns a transducer that removes any directly following duplicate elements. The default equality-predicate is {{equal?}}.
 
-Stateful.
+''Stateful.''
 
 <procedure>(tdelete-duplicates [equality-predicate])</procedure>
 
 Returns a transducer that removes any subsequent duplicate elements compared using equality-predicate. If the underlying data structure used for detecting duplicates can't handle arbitrary equality predicates, it should at least support {{eq?}}, {{eqv?}} and {{equal?}}. The default equality-predicate is {{equal?}}.
 
-Stateful.
+''Stateful.''
 
 <procedure>(tsegment n)</procedure>
 
 Returns a transducer that groups {{n}} inputs in lists of {{n}} elements. When the transduction stops, it flushes any remaining collection, even if it contains fewer than {{n}} elements.
 
-Stateful.
+''Stateful.''
 
 <procedure>(tpartition pred?)</procedure>
 
 Returns a transducer that groups inputs in lists by whenever {{(pred? input)}} changes value.
 
-Stateful.
+''Stateful.''
 
 <procedure>(tadd-between value)</procedure>
 
 Returns a transducer which interposes value between each value and the next. This does not compose gracefully with transducers like {{ttake}}, as you might end up ending the transduction on value.
 
-Stateful.
+''Stateful.''
 
 <procedure>(tenumerate [start])</procedure>
 
@@ -274,7 +274,7 @@ Returns a transducer that indexes values passed through it, starting at start, w
 (list-transduce (tenumerate 1) rcons (list 'first 'second 'third)) => ((1 . first) (2 . second) (3 . third))
 </enscript>
 
-Stateful.
+''Stateful.''
 
 <procedure>(tlog [logger])</procedure>
 
