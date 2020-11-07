@@ -286,7 +286,7 @@ These functions are in the (srfi 171 meta) module and are only usable when you w
 
 <procedure>(reduced value)</procedure>
 
-Wraps a value in a <reduced> container, signalling that the reduction should stop.
+Wraps a value in a {{<reduced>}} container, signalling that the reduction should stop.
 
 <procedure>(reduced? value)</procedure>
 
@@ -294,7 +294,7 @@ Returns {{#t}} if value is reduced.
 
 <procedure>(unreduce reduced-container)</procedure>
 
-Returns the value in reduced-container.
+Returns the value in {{reduced-container}}.
 
 <procedure>(ensure-reduced value)</procedure>
 
@@ -302,7 +302,7 @@ Wraps value in a reduced container if it is not already reduced.
 
 <procedure>(preserving-reduced reducer)</procedure>
 
-Wraps reducer in another reducer that encapsulates any returned reduced value in another reduced container. This is useful in places where you re-use a reducer with [collection]-reduce. If the reducer returns a reduced value, [collection]-reduce unwraps it. Unless handled, this leads to the reduction continuing.
+Wraps reducer in another reducer that encapsulates any returned reduced value in another reduced container. This is useful in places where you re-use a reducer with {{[collection]-reduce}}. If the reducer returns a reduced value, {{[collection]-reduce}} unwraps it. Unless handled, this leads to the reduction continuing.
 
 <procedure>(list-reduce f identity lst)</procedure>
 
@@ -328,9 +328,9 @@ The port version of {{list-reducer}}. It reduces over port using reader until re
 
 The port version of list-reducer. It reduces over gen until it returns the {{EOF}} object
 === Sample implementation
-The sample implementation is written in Guile, but should be straightforward to port since it uses no Guile-specific features apart from Guile's hash-table implementation. It is written for clarity over speed, but should be plenty fast anyway. The low-hanging fruit for optimization is to replace the composed transducers {{(such as tappend-map and tfilter-map)}} with non-composed implementations.
+The sample implementation is written in Guile, but should be straightforward to port since it uses no Guile-specific features apart from Guile's hash-table implementation. It is written for clarity over speed, but should be plenty fast anyway. The low-hanging fruit for optimization is to replace the composed transducers (such as {{tappend-map}} and {{tfilter-map}}) with non-composed implementations.
 
-Another optimization would be to return whether or not a reducer can return a reduced value, thus allowing [collection]-reduce to avoid checking for reduced values, however this would break compatibility with the sample implementation.
+Another optimization would be to return whether or not a reducer can return a reduced value, thus allowing {{[collection]-reduce}} to avoid checking for reduced values, however this would break compatibility with the sample implementation.
 === Acknowledgements
 First of all, this would not have been done without Rich Hickey, who introduced transducers into Clojure. His talks were important for me to grasp the basics of transducers. Then I would like to thank large parts of the Clojure community for also struggling with understanding transducers. The amount of material produced explaining them in general, and Clojure's implementation specifically, has been instrumental in letting me make this a clean-room implementation.
 
