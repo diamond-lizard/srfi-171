@@ -2,7 +2,7 @@
 === Abstract
 A library implementing transducers -- composable algorithmic transformations. Scheme has many different ways of expressing transformations over different collection types, but they are all unique to whatever base type they work on. This SRFI proposes a new construct, the transducer, that is oblivious to the context in which it is being used.
 
-For more information see: [[https://srfi.schemers.org/srfi-171/][SRFI-171: Transducers]]
+For more information see: [[https://srfi.schemers.org/srfi-171/|SRFI-171: Transducers]]
 === Rationale
 Some of the most common operations used in the Scheme language are those transforming lists: map, filter, take and so on. They work well, are well understood, and are used daily by most Scheme programmers. They are however not general because they only work on lists, and they do not compose very well since combining {{n}} of them builds {{(- N 1)}} intermediate lists.
 
