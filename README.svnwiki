@@ -12,31 +12,31 @@ The traditional Scheme approach of having collection-specific procedures is not 
 === Dependencies
 The sample implementation of transducers depends on the following:
 
-  * SRFI 9, define-record-type (included in R^7RS small)
-  * SRFI-69 (hash-tables)
-  * Proper compose procedure (included if it is not available)
-  * A vector->list that behaves like in SRFI 43 (included in R^7RS small).
+* SRFI 9, define-record-type (included in R^7RS small)
+* SRFI-69 (hash-tables)
+* Proper compose procedure (included if it is not available)
+* A vector->list that behaves like in SRFI 43 (included in R^7RS small).
 === Portability
 The sample implementation is easily portable to any R^5RS/R^6RS/R^7RS-compatible Scheme. The non-standard things are:
 
-  * a vector->list that takes start and end arguments
-  * A hash-table implementation with support for arbitrary equality predicates
-  * case-lambda, preferably efficiently implemented
+* a vector->list that takes start and end arguments
+* A hash-table implementation with support for arbitrary equality predicates
+* case-lambda, preferably efficiently implemented
 === General discussion
 ==== Concept: Reducers
 The central part of transducers are 3-arity reducing functions.
 
- * (): Produce an identity
- * (result-so-far): completion. If you have nothing to do, then just return the result so far
- * (result-so-far input) do whatever you like to the input and produce a new result-so-far
+* (): Produce an identity
+* (result-so-far): completion. If you have nothing to do, then just return the result so far
+* (result-so-far input) do whatever you like to the input and produce a new result-so-far
 
 In the case of a summing + reducer, the reducer would produce, in arity order: 0, result-so-far, (+ result-so-far input). This happens to be exactly what the regular + does.
 ==== Concept: Transducers
 A transducer is a one-arity function that takes a reducer and produces a reducing function that behaves as follows:
 
-  * (): calls reducer with no arguments (producing its identity)
-  * (result-so-far): Maybe transform the result-so-far and call reducer with it.
-  * (result-so-far input) Maybe do something to input and maybe call the reducer with result-so-far and the maybe-transformed input.
+* (): calls reducer with no arguments (producing its identity)
+* (result-so-far): Maybe transform the result-so-far and call reducer with it.
+* (result-so-far input) Maybe do something to input and maybe call the reducer with result-so-far and the maybe-transformed input.
 
 A simple example is as following: (list-transduce (tfilter odd?) + '(1 2 3 4 5)). This first returns a transducer filtering all odd elements, then it runs + without arguments to retrieve its identity. It then starts the transduction by passing + to the transducer returned by (tfilter odd?) which returns a reducing function. It works not unlike reduce from SRFI 1, but also checks whether one of the intermediate transducers returns a "reduced" value (implemented as a SRFI 9 record), which means the reduction finished early.
 
