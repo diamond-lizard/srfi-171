@@ -4,6 +4,7 @@
  (maintainer "Sergey Goldgaber")
  (synopsis "SRFI-171: Transducers")
  (category data)
+ (dependencies r6rs-bytevectors vector-lib srfi-1 srfi-69)
  (test-dependencies test)
  (license "MIT")
  (components (extension srfi-171)))
