@@ -128,7 +128,7 @@ a simple consing reducer. When called without values, it returns its identity, {
 
 <procedure>reverse-rcons</procedure>
 
-same as rcons, but leaves the values in their reversed order.
+same as {{rcons}}, but leaves the values in their reversed order.
 
 <enscript highlight="scheme">
 (list-transduce (tmap (lambda (x) (+ x 1))) reverse-rcons (list 0 1 2 3)) => (4 3 2 1)
@@ -146,7 +146,7 @@ The reducer version of any. Returns {{(reduced (pred? value))}} if any {{(pred? 
 
 <procedure>(revery pred?)</procedure>
 
-The reducer version of every. Stops the transduction and returns {{(reduced #f)}} if any {{(pred? value)}} returns #f. If every {{(pred? value)}} returns true, it returns the result of the last invocation of {{(pred? value)}}. The identity is {{#t}}.
+The reducer version of {{every}}. Stops the transduction and returns {{(reduced #f)}} if any {{(pred? value)}} returns #f. If every {{(pred? value)}} returns true, it returns the result of the last invocation of {{(pred? value)}}. The identity is {{#t}}.
 
 <enscript highlight="scheme">
 (list-transduce
@@ -170,7 +170,7 @@ A simple counting reducer. Counts the values that pass through the transduction.
 
 <procedure>(tmap proc)</procedure>
 
-Returns a transducer that applies proc to all values. Must be stateless.
+Returns a transducer that applies {{proc}} to all values. Must be stateless.
 
 <procedure>(tfilter pred?)</procedure>
 
@@ -212,7 +212,7 @@ Stateful.
 
 <procedure>(ttake-while pred? [retf])</procedure>
 
-Returns a transducer that stops the transduction after {{pred?}} has returned #f. Any subsequent values are ignored and the last successful value is returned. retf is a function that gets called whenever {{pred?}} returns false. The arguments passed are the result so far and the input for which {{pred?}} returns #f. The default function is (lambda (result input) result)
+Returns a transducer that stops the transduction after {{pred?}} has returned {{#f}}. Any subsequent values are ignored and the last successful value is returned. {{retf}} is a function that gets called whenever {{pred?}} returns false. The arguments passed are the result so far and the input for which {{pred?}} returns {{#f}}. The default function is {{(lambda (result input) result)}}
 
 Stateful.
 
@@ -226,11 +226,11 @@ Stateful.
 
 <procedure>(tappend-map proc)</procedure>
 
-The same as (compose (tmap proc) tconcatenate).
+The same as {{(compose (tmap proc) tconcatenate)}}.
 
 <procedure>tflatten</procedure>
 
-tflatten is a transducer that flattens an input consisting of lists.
+{{tflatten}} is a transducer that flattens an input consisting of lists.
 
 <enscript highlight="scheme">
 (list-transduce tflatten rcons '((1 2) 3 (4 (5 6) 7 8) 9) => (1 2 3 4 5 6 7 8 9)
@@ -238,13 +238,13 @@ tflatten is a transducer that flattens an input consisting of lists.
 
 <procedure>(tdelete-neighbor-duplicates [equality-predicate])</procedure>
 
-Returns a transducer that removes any directly following duplicate elements. The default equality-predicate is equal?.
+Returns a transducer that removes any directly following duplicate elements. The default equality-predicate is {{equal?}}.
 
 Stateful.
 
 <procedure>(tdelete-duplicates [equality-predicate])</procedure>
 
-Returns a transducer that removes any subsequent duplicate elements compared using equality-predicate. If the underlying data structure used for detecting duplicates can't handle arbitrary equality predicates, it should at least support eq?, eqv? and equal?. The default equality-predicate is equal?.
+Returns a transducer that removes any subsequent duplicate elements compared using equality-predicate. If the underlying data structure used for detecting duplicates can't handle arbitrary equality predicates, it should at least support {{eq?}}, {{eqv?}} and {{equal?}}. The default equality-predicate is {{equal?}}.
 
 Stateful.
 
