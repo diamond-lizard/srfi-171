@@ -1,0 +1,9 @@
+;;; srfi-171.egg -*- Scheme -*- vim: ft=scheme:
+
+((author "Linus Björnstam bjornstam.linus@fastmail.se")
+ (maintainer "Sergey Goldgaber")
+ (synopsis "SRFI-171: Transducers")
+ (category data)
+ (test-dependencies test)
+ (license "MIT")
+ (components (extension srfi-171)))
