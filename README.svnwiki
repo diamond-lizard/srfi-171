@@ -54,31 +54,53 @@ Transducers, being oblivious to context, are neither eager nor lazy, but are gen
 === Specification
 ==== Applying transducers
 ===== list-transduce
+
 <procedure>(list-transduce xform f lst)</procedure>
+
+
 <procedure>(list-transduce xform f identity lst)</procedure>
+
 
 Initializes the transducer xform by passing the reducer f to it. If no identity is provided, f is run without arguments to return the reducer identity. It then reduces over lst using the identity as the seed.
 
 If one of the transducers finishes early (such as ttake or tdrop), it communicates this by returning a reduced value, which in the sample implementation is just a value wrapped in a SRFI 9 record type named "reduced". If such a value is returned by the transducer, list-transduce must stop execution and return an unreduced value immediately.
 ===== vector-transduce
+
 <procedure>(vector-transduce xform f vec)</procedure>
+
+
 <procedure>(vector-transduce xform f identity vec)</procedure>
+
 
 Same as list-transduce, but reduces over a vector instead of a list.
 ===== string-transduce
+
 <procedure>(string-transduce xform f str)</procedure>
+
+
 <procedure>(string-transduce xform f identity str)</procedure>
+
 
 Same as list-transduce, but for strings.
 ===== bytevector-u8-transduce
+
 <procedure>(bytevector-u8-transduce xform f bvec)</procedure>
+
+
 <procedure>(bytevector-u8-transduce xform f identity bvec)</procedure>
+
 
 Same as list-transduce, but for u8-bytevectors.
 ===== port-transduce
+
 <procedure>(port-transduce xform f reader)</procedure>
+
+
 <procedure>(port-transduce xform f reader port)</procedure>
+
+
 <procedure>(port-transduce xform f init reader port)</procedure>
+
 
 If port is provided, it applies (xform f) to every value produced by (reader port) until the EOF object is returned. If port is not provided, it calls reader without arguments until the EOF object is returned.
 
@@ -86,8 +108,12 @@ If port is provided, it applies (xform f) to every value produced by (reader por
 (port-transduce (tfilter odd?) rcons read (open-input-string "1 2 3 4")) => (1 3)
 </enscript>
 ===== generator-transduce
+
 <procedure>(generator-transduce xform f gen)</procedure>
+
+
 <procedure>(generator-transduce xform f init gen)</procedure>
+
 
 Same as list-transduce, but for srfi-158-styled generators.
 ==== Reducers
