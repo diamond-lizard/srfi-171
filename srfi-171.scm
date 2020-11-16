@@ -6,6 +6,10 @@
   (import srfi-69)
   (import (r6rs bytevectors))
   (import (chicken module))
+  (import (chicken platform))
+
+  (register-feature! 'srfi-171)
+
   (export rcons
           reverse-rcons
           rcount
